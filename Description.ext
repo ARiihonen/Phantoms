@@ -1,0 +1,171 @@
+//https://community.bistudio.com/wiki/Description.ext
+
+author="Sniper Party / Caranfin";
+
+//Overview text and picture for the mission list (admin sees when selecting missions, also shown when slotting in)
+//overviewText = "Overview text"; This is overwritten by the editor-set description
+//overviewPicture = "LoadScreen.paa"; This does not work on dedicated servers. Arma is bad.
+
+//Loading screen texts and picture for loading the mission
+OnLoadName = "TvT03-10 - Phantoms";
+OnLoadMission = "Sometimes the greatest victory does not require a single shot";
+//loadscreen = "";
+
+saving = 0; //Set saving to 0 so that you can exit the mission without saving and causing dumb bugs when reloading
+disabledai = 1; //Disable AI taking over un-taken player slots
+
+//Default respawn options
+respawn = "NONE";
+respawnDelay = 0;
+respawnDialog = 0;
+respawnOnStart = 0;
+respawnTemplates[] = {"Spectator"};
+
+enableDebugConsole = 1; //enable debug console for the admin 
+
+//Game type stuff. Doesn't matter, but will get shown in mission select.
+class Header {
+	gameType = TDM;
+	minPlayers = 3;
+	maxPlayers = 10;
+};
+
+//Mission ending states, used via BIS_fnc_endMission from end.sqf
+class CfgDebriefing {
+
+	class Dead {
+		title = "You are dead";
+		subtitle = "Whichever team won, you lost.";
+		picture = "KIA";
+		pictureColor[] = {0.6,0.1,0.2,1};
+	};
+	
+	class BlueVictoryAll {
+		title = "Complete success";
+		subtitle = "None of your shipment was tampered with";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		picturecolor[] = {0.0,0.3,0.6,1};
+	};
+	
+	class BlueVictory {
+		title = "Mission success";
+		subtitle = "Most of the shipment is safe";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		picturecolor[] = {0.0,0.3,0.6,1};
+	};
+	
+	class BlueLoss {
+		title = "Mission failed";
+		subtitle = "Most of the shipment was compromised";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_ca.paa";
+		pictureColor[] = {1.0,0.3,0.2,1.0};
+	};
+	
+	class RedVictoryAll {
+		title = "Complete success";
+		subtitle = "Entire shipment bugged";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		picturecolor[] = {0.0,0.3,0.6,1};
+	};
+	
+	class RedVictory {
+		title = "Mission success";
+		subtitle = "Most of the shipment is tracked";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		picturecolor[] = {0.0,0.3,0.6,1};
+	};
+	
+	class RedLossAmount {
+		title = "Mission failed";
+		subtitle = "Not enough boxes bugged";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_ca.paa";
+		pictureColor[] = {1.0,0.3,0.2,1.0};
+	};
+	
+	class RedLossSearch {
+		title = "Mission failed";
+		subtitle = "Too much suspicion raised";
+		picture = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_ca.paa";
+		pictureColor[] = {1.0,0.3,0.2,1.0};
+	};
+	
+};
+
+//Functions, used to define preSet.sqf as "preInit". You can also make your own functions, but that's generally not needed.
+//More information on defining your own functions: https://community.bistudio.com/wiki/Functions_Library_%28Arma_3%29#Adding_a_Function
+class CfgFunctions
+{
+	class CARAN
+	{
+		class logic
+		{
+			class preset
+			{
+				preInit = 1; // 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
+				file = "preSet.sqf";
+			};
+		};
+	};
+};
+
+//Notifications (the popups you get when completing a task and so on), can be used via BIS_fnc_showNotification
+class CfgNotifications {
+
+	class TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskAssigned_0";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+		description = "%1";
+		priority = 5;
+		sound = "taskAssigned";
+	};
+	class TaskCreated: TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskCreated_0";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconCreated_ca.paa";
+		description = "%1";
+		priority = 5;
+		sound = "taskCreated";
+	};
+	class TaskSucceeded: TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskSucceeded_0";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		description = "%1";
+		priority = 6;
+		color[] = {0.7,1.0,0.3,1.0};
+		sound = "taskSucceeded";
+	};
+	class TaskFailed: TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskFailed_0";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconFailed_ca.paa";
+		description = "%1";
+		priority = 6;
+		color[] = {1.0,0.3,0.2,1.0};
+		sound = "taskFailed";
+	};
+	class TaskCanceled: TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskCanceled_0";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconCanceled_ca.paa";
+		description = "%1";
+		priority = 6;
+		color[] = {0.7,0.7,0.7,1.0};
+		sound = "taskCanceled";
+	};
+	class TaskUpdated: TaskAssigned
+	{
+		title = "$STR_A3_CfgNotifications_TaskUpdated_0";
+		description = "%1";
+		priority = 4;
+		sound = "taskUpdated";
+	};
+	
+	class TrackerPlaced {
+		title = "Bug placed";
+		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIconDone_ca.paa";
+		description = "Tracking online";
+		sound = "taskSucceeded";
+	};
+};

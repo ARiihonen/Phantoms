@@ -1,0 +1,3 @@
+Scouts have found an important FIA guerilla logistical centre in the <marker name = 'area'>abandoned hotel</marker>. This logistics centre receives shipments of supplies via the sea, and stores them for distribution to various guerilla camps all over Altis.
+<br /> <br />
+The site has been left lightly guarded, which provides a nice window of opportunity for infiltration.

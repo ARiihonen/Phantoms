@@ -1,0 +1,4 @@
+The site has been left lightly guarded. It is a clear night so visibility is not zero, particularly with some street lamps still operational in the site.
+<br /> <br />
+You have approximately %1 minutes until more FIA troopers arrive to help secure the site. You should aim to complete your mission by then.
+%2

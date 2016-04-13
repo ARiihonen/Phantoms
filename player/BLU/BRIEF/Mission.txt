@@ -1,0 +1,1 @@
+You are tasked with protecting the supply caches around the <marker name = 'area'>abandoned hotel</marker>.

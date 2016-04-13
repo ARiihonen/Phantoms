@@ -1,0 +1,9 @@
+Various actions will have an effect on the chance a search will be conducted: 
+<br /> <br />
+Each non-silenced shot you fire will <font color = '#DD0505'>raise</font> the chance by <font color = '#DD0505'>%1 percent</font>.
+<br /> <br />
+Each enemy you kill will <font color = '#DD0505'>raise</font> the chance by <font color = '#DD0505'>%2 percent</font>.
+<br /> <br />
+Destroying a box will <font color = '#05DD05'>reduce</font> the chance by <font color = '#05DD05'>%3 percent</font>.
+<br /> <br />
+The search will always happen if trackers are left on a dead infiltrator at mission end, and if all the defenders died.

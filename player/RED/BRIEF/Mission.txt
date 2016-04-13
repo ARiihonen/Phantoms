@@ -1,0 +1,3 @@
+Your mission is to plant GPS trackers on at least %1 supply boxes. This should provide a sufficiently large coverage and guarantee we will be able to locate a large amount of the FIA camps the site provides supplies for.
+<br /> <br />
+You will infiltrate the site in an SDV via <marker pos = 'redStart'>the sea</marker>. After the mission is complete, get back out to the sea in your SDV and call for extraction from your action menu.
